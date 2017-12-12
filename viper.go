@@ -1185,6 +1185,12 @@ func (v *Viper) ReadConfig(in io.Reader) error {
 	v.config = make(map[string]interface{})
 	return v.unmarshalReader(in, v.config)
 }
+// LoadConfig will load config from typical map without a file.
+func LoadConfig(config map[string]interface{}) { v.LoadConfig(config) }
+func (v *Viper) LoadConfig(config map[string]interface{}) {
+	insensitiviseMap(config)
+	v.config = config
+}
 
 // MergeConfig merges a new configuration with an existing config.
 func MergeConfig(in io.Reader) error { return v.MergeConfig(in) }
